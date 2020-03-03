@@ -14,12 +14,12 @@ template <class DT>
 class GLRow {
 	friend ostream& operator<< <DT>(ostream& s, GLRow<DT>& oneGLRow);
 
-Protected:
+protected:
 	DT* _Info;
 	int _Next;
 	int _Down;
 
-Public:
+public:
 	GLRow();
 	GLRow(DT& newInfo);
 	GLRow(GLRow<DT>& anotherOne);
@@ -35,7 +35,77 @@ Public:
 
 };
 
+template<class DT>
+GLRow<DT>::GLRow()
+{
+	_Info = NULL;
+	_Next = -1;
+	_Down = -1;
+}
 
+template <class DT>
+GLRow<DT>::GLRow(DT& newInfo) {
+	_Info = newInfo;
+	_Next = -1;
+	_Down = -1;
+}
+
+template <class DT>
+GLRow<DT>::GLRow(GLRow<DT>& anotherOne) {
+	_Info = anotherOne.getInfo();
+	_Next = anotherOne.getNext();
+	_Down = anotherOne.getDown();
+}
+
+template <class DT>
+ostream& operator << (ostream& s, GLRow<DT>& oneGLRow) {
+	return s;
+}
+
+template<class DT>
+GLRow<DT>& GLRow<DT>::operator=(GLRow<DT>& anotherOne)
+{
+	// TODO: insert return statement here
+}
+
+template<class DT>
+int GLRow<DT>::getNext()
+{
+	return _Next;
+}
+
+template <class DT>
+int GLRow<DT>::getDown() {
+	return _Down;
+}
+
+template <class DT>
+DT& GLRow<DT>::getInfo() {
+	return _Info;
+}
+
+template <class DT>
+int GLRow<DT>::setNext(int n) {
+	_Next = n;
+	return _Next;
+}
+
+template <class DT>
+int GLRow<DT>::setDown(int d) {
+	_Down = d;
+	return _Down;
+}
+
+template <class DT>
+int GLRow<DT>::setInfo(DT& x) {
+	_Info = x;
+	return _Info;
+}
+
+template <class DT>
+GLRow<DT>::~GLRow() {
+	//Implement destructor
+}
 
 template <class DT>
 class ArrayGLL; //class prototype
@@ -45,14 +115,14 @@ ostream& operator <<(ostream& s, ArrayGLL<DT>& oneGLL);
 
 template <class DT>
 class ArrayGLL {
-	friend ostream& opeator<< <DT>(ostream& s, ArrayGLL<DT>& oneGLL);
-Protected:
+	friend ostream& operator<< <DT>(ostream& s, ArrayGLL<DT>& oneGLL);
+protected:
 	GLRow<DT>* myGLL;
 	int maxSize; //Maximum siz of the array of GLRows
 	int firstElement;
 	int firstFree;
 
-Public:
+public:
 	ArrayGLL();
 	ArrayGLL(int size);
 	ArrayGLL(ArrayGLL<DT>& anotherOne);
@@ -78,3 +148,5 @@ int main()
 {
     std::cout << "Hello World!\n";
 }
+
+
