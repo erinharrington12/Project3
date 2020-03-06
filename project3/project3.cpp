@@ -118,7 +118,7 @@ class ArrayGLL {
 	friend ostream& operator<< <DT>(ostream& s, ArrayGLL<DT>& oneGLL);
 protected:
 	GLRow<DT>* myGLL;
-	int maxSize; //Maximum siz of the array of GLRows
+	int maxSize; //Maximum size of the array of GLRows
 	int firstElement;
 	int firstFree;
 
@@ -141,9 +141,98 @@ public:
 	~ArrayGLL(); //destructor
 };
 
+template <class DT>
+ArrayGLL<DT>::ArrayGLL() {
+	myGLL = NULL;
+	maxSize = 0;
+	firstElement = 0;
+	firstFree = 0;
+}
 
+template <class DT>
+ArrayGLL<DT>::ArrayGLL(int size) {
+	myGLL = new GLRow[size];
+	maxSize = size;
+	firstElement = 0;
+	firstFree = 0;
+}
 
+template <class DT>
+ArrayGLL<DT>::ArrayGLL(ArrayGLL<DT>& anotherOne) {
+	myGLL = new GLRow[anotherOne.size()];
+	maxSize = anotherOne.size();
+	firstElement = anotherOne.getFirstElement();
+	firstFree = anotherOne.getFirstFree();
+}
 
+template<class DT>
+ArrayGLL<DT>& ArrayGLL<DT>::operator=(ArrayGLL<DT>& anotherOne)
+{
+	// TODO: insert return statement here
+}
+
+template <class DT>
+void ArrayGLL<DT>::display() {
+
+}
+
+template <class DT>
+int ArrayGLL<DT>::find(DT& key) {
+	/*for (int i = 0; i < this->size(); i++) {
+		if (*(this.)
+	}*/
+}
+
+template <class DT>
+void ArrayGLL<DT>::findDisplayPath(DT& key) {
+
+}
+
+template <class DT>
+int ArrayGLL<DT>::noFree() {
+	return 0;
+}
+
+template <class DT>
+int ArrayGLL<DT>::size() {
+	return 0;
+}
+
+template <class DT>
+int ArrayGLL<DT>::parentPos(DT& key) {
+	return 0;
+}
+
+template<class DT>
+GLRow<DT>& ArrayGLL<DT>::operator[](int pos)
+{
+	// TODO: insert return statement here
+}
+
+template <class DT>
+int ArrayGLL<DT>::getFirstFree() {
+	return 0;
+}
+
+template <class DT>
+int ArrayGLL<DT>::getFirstElement() {
+
+}
+
+template <class DT>
+void ArrayGLL<DT>::setFirstFree(int pos) {
+	firstFree = pos;
+}
+
+template <class DT>
+void ArrayGLL<DT>::setFirstElement(int pos) {
+	firstElement = pos;
+}
+
+template <class DT>
+ArrayGLL<DT>::~ArrayGLL() {
+	//destructor
+}
 int main()
 {
     std::cout << "Hello World!\n";
