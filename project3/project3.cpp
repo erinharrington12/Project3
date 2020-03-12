@@ -45,7 +45,7 @@ GLRow<DT>::GLRow()
 
 template <class DT>
 GLRow<DT>::GLRow(DT& newInfo) {
-	_Info = newInfo;
+	_Info = &newInfo;
 	_Next = -1;
 	_Down = -1;
 }
@@ -59,6 +59,7 @@ GLRow<DT>::GLRow(GLRow<DT>& anotherOne) {
 
 template <class DT>
 ostream& operator << (ostream& s, GLRow<DT>& oneGLRow) {
+	s << "Info: " << oneGLRow.getInfo() << ", Next value: " << oneGLRow.getNext() << ", Down Value: " << oneGLRow.getDown() << endl; 
 	return s;
 }
 
@@ -66,6 +67,8 @@ template<class DT>
 GLRow<DT>& GLRow<DT>::operator=(GLRow<DT>& anotherOne)
 {
 	// TODO: insert return statement here
+	this->setInfo(anotherOne.getInfo());
+	return *this;
 }
 
 template<class DT>
@@ -81,7 +84,7 @@ int GLRow<DT>::getDown() {
 
 template <class DT>
 DT& GLRow<DT>::getInfo() {
-	return _Info;
+	return *_Info;
 }
 
 template <class DT>
@@ -98,8 +101,8 @@ int GLRow<DT>::setDown(int d) {
 
 template <class DT>
 int GLRow<DT>::setInfo(DT& x) {
-	_Info = x;
-	return _Info;
+	_Info = &x;
+	return *_Info;
 }
 
 template <class DT>
@@ -151,7 +154,7 @@ ArrayGLL<DT>::ArrayGLL() {
 
 template <class DT>
 ArrayGLL<DT>::ArrayGLL(int size) {
-	myGLL = new GLRow[size];
+	myGLL = new GLRow<DT>();
 	maxSize = size;
 	firstElement = 0;
 	firstFree = 0;
@@ -159,7 +162,7 @@ ArrayGLL<DT>::ArrayGLL(int size) {
 
 template <class DT>
 ArrayGLL<DT>::ArrayGLL(ArrayGLL<DT>& anotherOne) {
-	myGLL = new GLRow[anotherOne.size()];
+	myGLL = new GLRow<DT>[anotherOne.size()];
 	maxSize = anotherOne.size();
 	firstElement = anotherOne.getFirstElement();
 	firstFree = anotherOne.getFirstFree();
@@ -171,16 +174,19 @@ ArrayGLL<DT>& ArrayGLL<DT>::operator=(ArrayGLL<DT>& anotherOne)
 	// TODO: insert return statement here
 }
 
+template<class DT>
+ostream& operator << (ostream& s, ArrayGLL<DT>& anotherOne) {
+	s << "hello there" << endl;
+	return s;
+}
 template <class DT>
-void ArrayGLL<DT>::display() {
+void ArrayGLL<DT>::display() { //10% BONUS
 
 }
 
 template <class DT>
 int ArrayGLL<DT>::find(DT& key) {
-	/*for (int i = 0; i < this->size(); i++) {
-		if (*(this.)
-	}*/
+	
 }
 
 template <class DT>
@@ -206,7 +212,8 @@ int ArrayGLL<DT>::parentPos(DT& key) {
 template<class DT>
 GLRow<DT>& ArrayGLL<DT>::operator[](int pos)
 {
-	// TODO: insert return statement here
+	
+	return myGLL[pos];
 }
 
 template <class DT>
@@ -235,7 +242,23 @@ ArrayGLL<DT>::~ArrayGLL() {
 }
 int main()
 {
-    std::cout << "Hello World!\n";
+	ArrayGLL<int> firstGLL(20);
+	int noElements, value, next, down, parentPos;
+	int pos = -1;
+	int keyValue;
+	int tempValue = 0;
+	GLRow<int> oneRow;
+
+	//first line of input contains the number of segments
+	cin >> noElements;
+	for (int i = 0; i < noElements; i++) {
+		cin >> value >> next >> down;
+		oneRow.setInfo(value);
+		oneRow.setNext(next);
+		oneRow.setDown(down);
+		firstGLL[i] = oneRow;
+	}
+	cout << firstGLL[0] << endl;
 }
 
 
